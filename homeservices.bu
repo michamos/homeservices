@@ -27,10 +27,10 @@ systemd:
         # added to the root image in a future Fedora CoreOS release as it will
         # prevent the service from failing.
         ExecStart=/usr/bin/rpm-ostree install --apply-live --allow-inactive nfs-utils
-	# Disable NFSv3 daemons
-	ExecStart=systemctl mask --now rpc-statd.service rpcbind.service rpcbind.socket
-	# Enable NFS
-	ExecStart=systemctl enable nfs-server
+        # Disable NFSv3 daemons
+        ExecStart=systemctl mask --now rpc-statd.service rpcbind.service rpcbind.socket
+        # Enable NFS
+        ExecStart=systemctl enable nfs-server
         ExecStart=/bin/touch /var/lib/%N.stamp
 
         [Install]
