@@ -34,17 +34,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: set-matrix
-        run: |
-          echo "matrix<<EOF" >> $GITHUB_OUTPUT
-          ls containers/ | jq -R -s -c 'split("\n")[:-1]' >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(ls containers/ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
   build-and-push-image:
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     strategy:
         matrix:
-            image: ${{ fromJson(needs.list-manifests.outputs.matrix) }}
+            image: ${{ fromJson(needs.list-containers.outputs.matrix) }}
     permissions:
       contents: read
       packages: write
