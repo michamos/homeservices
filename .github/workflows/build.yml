@@ -14,7 +14,7 @@ jobs:
         run: >
           docker run --interactive --rm
           --volume ${PWD}:/pwd quay.io/coreos/butane:release
-          --pretty --strict /pwd/homeservices.bu > /pwd/homeservices.ign
+          --pretty --strict /pwd/homeservices.bu > homeservices.ign
       - name: Archive ignition file
         uses: actions/upload-artifact@v3
         with:
