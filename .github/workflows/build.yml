@@ -9,7 +9,6 @@ on:
 env:
   REGISTRY: ghcr.io
   NAMESPACE: michamos
-  IMAGE_NAME: syncthing
 
 jobs:
   build-ignition:
@@ -35,14 +34,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: set-matrix
-        run: echo "matrix=$(ls containers/ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        run: |
+          echo "matrix<<EOF" >> $GITHUB_OUTPUT
+          ls containers/ | jq -R -s -c 'split("\n")[:-1]' >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
   build-and-push-image:
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     strategy:
         matrix:
-            manifest: ${{ fromJson(needs.list-manifests.outputs.matrix) }}
+            image: ${{ fromJson(needs.list-manifests.outputs.matrix) }}
     permissions:
       contents: read
       packages: write
@@ -60,11 +62,11 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ matrix.image }}
       - name: Build and push Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
-          context: containers/${{ env.IMAGE_NAME }}
+          context: containers/${{ matrix.image }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
