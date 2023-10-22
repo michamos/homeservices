@@ -5,6 +5,7 @@ passwd:
     - name: core
       ssh_authorized_keys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGuvnKEDyKjlvHl7p2HACv6CkvgygyOIjIjUkFVB9bTp micha@shiva
+	- ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC2TBOEV8J1RVuacci4rua5l0caZKT2dcJZWOxuOHHMx micha@baraddur
 systemd:
   units:
     - name: rpm-ostree-install-nfs.service
