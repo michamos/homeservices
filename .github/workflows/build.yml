@@ -38,14 +38,13 @@ jobs:
 
   build-and-push-image:
     runs-on: ubuntu-latest
-    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    needs: list-containers
     strategy:
         matrix:
             image: ${{ fromJson(needs.list-containers.outputs.matrix) }}
     permissions:
       contents: read
       packages: write
-      # 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
