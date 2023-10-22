@@ -30,7 +30,7 @@ systemd:
         # Disable NFSv3 daemons
         ExecStart=systemctl mask --now rpc-statd.service rpcbind.service rpcbind.socket
         # Enable NFS
-        ExecStart=systemctl enable nfs-server
+        ExecStart=systemctl enable --now nfs-server
         ExecStart=/bin/touch /var/lib/%N.stamp
 
         [Install]
