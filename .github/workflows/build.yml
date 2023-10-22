@@ -10,11 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
       - name: build ignition
         run: >
           docker run --interactive --rm
-          --volume ${PWD}:/pwd quay.io/coreos/butane:release
-          --pretty --strict /pwd/homeservices.bu > homeservices.ign
+          --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release
+          --pretty --strict homeservices.bu > homeservices.ign
       - name: Archive ignition file
         uses: actions/upload-artifact@v3
         with:
