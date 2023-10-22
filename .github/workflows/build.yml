@@ -1,0 +1,22 @@
+name: Build resources
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build ignition
+        run: >
+          docker run --interactive --rm
+          --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release
+          --pretty --strict homeservices.bu > homeservices.ign
+      - name: Archive ignition file
+        uses: actions/upload-artifact@v3
+        with:
+          name: homeservices-ignition
+          path: homeservices.ign
