@@ -10,6 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: debug
+        run: ls ${PWD}
       - name: build ignition
         run: >
           docker run --interactive --rm
