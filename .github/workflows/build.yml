@@ -22,7 +22,7 @@ jobs:
           --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release
           --pretty --strict homeservices.bu > homeservices.ign
       - name: Archive ignition file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: homeservices-ignition
           path: homeservices.ign
