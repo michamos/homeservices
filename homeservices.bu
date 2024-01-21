@@ -29,7 +29,7 @@ storage:
 
           [Container]
           HostName=syncthing
-          Image=ghcr.io/michamos/syncthing
+          Image=ghcr.io/michamos/syncthing:main
           Volume=syncthing.volume:/var/syncthing
           Network=lan.network
 
