@@ -60,7 +60,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ matrix.image }}
       - name: Build and push Docker image
-        uses: docker/build-push-action@9f6f8c940b91232557f8699b21341a08624a8dce
+        uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0
         with:
           context: containers/${{ matrix.image }}
           push: true
