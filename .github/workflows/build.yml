@@ -21,11 +21,10 @@ jobs:
           docker run --interactive --rm
           --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release
           --pretty --strict homeservices.bu > homeservices.ign
-      - name: Archive ignition file
-        uses: actions/upload-artifact@v4
+      - name: Make a release with ignition file
+        uses: softprops/action-gh-release@v2
         with:
-          name: homeservices-ignition
-          path: homeservices.ign
+          files: homeservices.ign
 
   list-containers:
     runs-on: ubuntu-latest
