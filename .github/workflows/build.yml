@@ -24,6 +24,9 @@ jobs:
       - name: Make a release with ignition file
         uses: softprops/action-gh-release@v2
         with:
+          name: main
+          prerelease: true
+          tag_name: ${{ github.sha }}
           files: homeservices.ign
 
   list-containers:
