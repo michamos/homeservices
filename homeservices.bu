@@ -1,5 +1,5 @@
 variant: fcos
-version: 1.4.0
+version: 1.6.0
 storage:
   disks:
   - device: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1
@@ -7,6 +7,7 @@ storage:
     partitions:
     - size_mib: 0
       start_mib: 0
+      number: 1
       label: containers
   filesystems:
     - path: /var/lib/containers
