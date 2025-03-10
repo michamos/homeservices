@@ -1,0 +1,6 @@
+[Network]
+Driver=macvlan
+Options=parent=enp6s18
+Subnet=192.168.1.0/24
+IPRange=192.168.1.0/25
+Gateway=192.168.1.254
