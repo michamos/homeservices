@@ -14,40 +14,9 @@ storage:
       device: /dev/disk/by-partlabel/containers
       format: ext4
       with_mount_unit: true
-  files:
-    - path: /etc/containers/systemd/lan.network
-      contents:
-        inline: |
-          [Network]
-          Driver=macvlan
-          Options=parent=enp6s18
-          Subnet=192.168.1.0/24
-          IPRange=192.168.1.0/25
-          Gateway=192.168.1.254
-
-    - path: /etc/containers/systemd/syncthing.container
-      contents:
-        inline: |
-          [Unit]
-          Description=Syncthing service
-          Wants=network-online.target
-          After=network-online.target
-
-          [Container]
-          HostName=syncthing
-          Image=ghcr.io/michamos/syncthing:main
-          AutoUpdate=registry
-          Volume=syncthing.volume:/var/syncthing
-          Network=lan.network
-
-          [Install]
-          WantedBy=multi-user.target
-    - path: /etc/containers/systemd/syncthing.volume
-      contents:
-        inline: |
-          [Volume]
-          User=1000
-          Group=1000
+  trees:
+    - local: containers
+      path: /etc/containers/systemd
 passwd:
   users:
     - name: core

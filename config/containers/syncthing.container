@@ -1,0 +1,14 @@
+[Unit]
+Description=Syncthing service
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+HostName=syncthing
+Image=ghcr.io/michamos/syncthing:main
+AutoUpdate=registry
+Volume=syncthing.volume:/var/syncthing
+Network=lan.network
+
+[Install]
+WantedBy=multi-user.target
