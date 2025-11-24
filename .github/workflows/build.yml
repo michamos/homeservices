@@ -18,7 +18,7 @@ jobs:
       contents: write
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: build ignition
         run: >
           docker run --interactive --rm
@@ -37,7 +37,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: set-matrix
         run: echo "matrix=$(ls containers/ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
@@ -52,7 +52,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Log in to the Container registry
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
         with:
